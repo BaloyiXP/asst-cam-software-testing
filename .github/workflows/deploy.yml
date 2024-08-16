@@ -34,7 +34,7 @@ jobs:
         run: docker image prune -af
   
       - name: Pull Docker image
-        run: docker pull ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
+        run: docker pull ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}
   
       - name: Start Docker containers
         #run: docker compose up -d
