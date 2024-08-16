@@ -25,6 +25,9 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo 'SSH connection successful'"
+      
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.ASTT_TEST_PASSWORD }}" | docker login ghcr.io --username "${{ secrets.ASTT_TEST_USERNAME }}" --password-stdin
 
       - name: Stop previous Docker containers
         ##run: docker compose down
