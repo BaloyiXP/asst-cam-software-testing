@@ -1,7 +1,7 @@
-#/bin/bash
+#!/bin/bash
 
 ### Enable virtual CAN interface
-sudo modprobe vcan
-sudo ip link add dev can0 type vcan
-sudo ip link set up can0
-sudo ip link show can0
+sudo -A  modprobe vcan
+sudo -A ip link add dev can0 type vcan
+sudo  -A ip link set up can0
+sudo  -A ip link show can0

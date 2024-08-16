@@ -10,7 +10,7 @@ services:
       - PYTHONPATH=/app/src
     command: >
         bash -c "poetry install
-        && python3 src/astt_gui/app.py"
+        && python3 src/astt_gui/app.py --host 0.0.0.0 --port 5000"
 
   astt-antenna-simulator:
     image: astt-cam-software:latest
