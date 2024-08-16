@@ -40,7 +40,7 @@ jobs:
         run: docker pull ghcr.io/baloyixp/astt-cam-software-testing:latest
   
       - name: Start Docker containers
-        #run: docker compose up -d
+        ##run: docker compose up -d
         run: sudo systemctl start astt-app.service
 
       - name: Reload Nginx configuration
