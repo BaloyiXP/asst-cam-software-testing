@@ -182,7 +182,7 @@ jobs:
       - name: Trigger deploy workflow
         uses: peter-evans/repository-dispatch@v2
         with:
-          repository: baloyixp/astt-cam-software-testing
+          repository: baloyixp/asst-cam-software-testing
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: deploy
 
