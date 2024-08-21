@@ -34,7 +34,7 @@ jobs:
 
       - name: Push the ASTT Docker Image for non-main branch
         if: ${{ github.ref_name != 'main' }}
-        run: docker push ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
+        run: docker push ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
 
       - name: Push the ASTT Docker Image for main branch
         if: ${{ github.ref_name == 'main' }}
