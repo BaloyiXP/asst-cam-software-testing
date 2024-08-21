@@ -23,11 +23,11 @@ jobs:
 
       - name: Build the ASTT Docker Image for non-main branch
         if: ${{ github.ref_name != 'main' }}
-        run: docker build -t ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }} .
+        run: docker build -t ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }} .
 
       - name: Build the ASTT Docker Image for main branch
         if: ${{ github.ref_name == 'main' }}
-        run: docker build -t ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }} .
+        run: docker build -t ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }} .
 
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.ASTT_TEST_PASSWORD }}" | docker login ghcr.io --username "${{ secrets.ASTT_TEST_USERNAME }}" --password-stdin
@@ -38,7 +38,7 @@ jobs:
 
       - name: Push the ASTT Docker Image for main branch
         if: ${{ github.ref_name == 'main' }}
-        run: docker push ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}
+        run: docker push ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}
 
   python-lint:
     runs-on: ubuntu-20.04
@@ -92,11 +92,11 @@ jobs:
     
       - name: Pull ASTT simulator image for main branch
         if: ${{ github.ref_name == 'main' }}
-        run: docker pull ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}
+        run: docker pull ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}
 
       - name: Pull ASTT simulator image for non-main branch
         if: ${{ github.ref_name != 'main' }}
-        run: docker pull ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
+        run: docker pull ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
 
       - name: Add VCAN module
         run: sudo apt-get install linux-modules-extra-$(uname -r)
@@ -106,18 +106,18 @@ jobs:
 
       - name: Run the simulator for main branch
         if: ${{ github.ref_name == 'main' }}
-        run: docker run -d --network=host ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }} bash -c "cd src/antenna_simulator && ./slave"
+        run: docker run -d --network=host ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }} bash -c "cd src/antenna_simulator && ./slave"
 
       - name: Run the simulator for non-main branch
         if: ${{ github.ref_name != 'main' }}
-        run: docker run -d --network=host ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }} bash -c "cd src/antenna_simulator && ./slave"
+        run: docker run -d --network=host ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }} bash -c "cd src/antenna_simulator && ./slave"
 
       - name: Run Acceptance Tests
         run: pytest tests/acceptance -v
 
       - name: Force remove docker image for non-main branch
         if: ${{ github.ref_name != 'main' }}
-        run: docker rmi -f ghcr.io/baloyixp/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
+        run: docker rmi -f ghcr.io/xitsembisob/astt-cam-software-testing:${{ env.ASTT_VERSION }}-dev.c${{ github.sha }}
 
       - name: Verify non-main docker images are deleted
         run: docker images
@@ -182,7 +182,7 @@ jobs:
       - name: Trigger deploy workflow
         uses: peter-evans/repository-dispatch@v2
         with:
-          repository: baloyixp/asst-cam-software-testing
+          repository: xitsembisob/asst-cam-software-testing
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: deploy
 
