@@ -36,9 +36,9 @@ jobs:
       - name: Remove old Docker images
         run: docker image prune -af
   
-      - name: Pull Docker image
-        run: docker pull ghcr.io/xitsembisob/astt-cam-software-testing:latest
-  
+      - name: Docker build 
+        run: docker build -t astt-cam-software .
+        
       - name: Start Docker containers
         ##run: docker compose up -d
         run: sudo systemctl start astt-app.service
