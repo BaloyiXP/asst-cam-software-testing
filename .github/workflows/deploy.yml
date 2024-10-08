@@ -40,11 +40,11 @@ jobs:
         run: docker build -t astt-cam-software .
         
       - name: Start Docker containers
-        ##run: docker compose up -d
-        run: sudo systemctl start astt-app.service
+        run: docker compose up -d
+        #run: sudo systemctl start astt-app.service
 
-      - name: Reload Nginx configuration
-        run: sudo systemctl reload nginx
+      #- name: Reload Nginx configuration
+       # run: sudo systemctl reload nginx
 
       - name: Cleanup SSH keys
         run: rm -rf ~/.ssh
